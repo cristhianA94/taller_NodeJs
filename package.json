@@ -1,0 +1,26 @@
+{
+  "name": "taller_NodeJs",
+  "version": "1.0.0",
+  "description": "Taller sobre Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristhianA94/taller_NodeJs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristhianA94/taller_NodeJs/issues"
+  },
+  "homepage": "https://github.com/cristhianA94/taller_NodeJs#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.7"
+  }
+}
