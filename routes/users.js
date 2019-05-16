@@ -33,7 +33,7 @@ app.get('/user', (req, res) => {
 app.post("/user", (req, res) => {
     let body = req.body;
     // Crea un objeto del schema User con sus atributos
-    let userGuardar = new User({
+    let usuarioPorEditar = new User({
         name: body.name,
         lastName: body.lastName,
         email: body.email,
@@ -43,7 +43,7 @@ app.post("/user", (req, res) => {
         rol: body.rol,
     });
     //Guarda el registro en la BD
-    userGuardar.save((err, usuarioDB) => {
+    usuarioPorEditar.save((err, usuarioDB) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -65,15 +65,25 @@ app.post("/user", (req, res) => {
 
 //Realiza el put
 app.put("/user/id", (req, res) => {
+    let id = req.params.id
     let body = req.body;
     // Crea un objeto del schema User con sus atributos
-    let userGuardar = new User({
-        nombre: body.nombre,
-        apellido: body.apellido,
-        age: body.edad
-    });
-    //Guarda el registro en la BD
-    userGuardar.save((err, usuarioDB) => {
+    let usuarioPorEditar = {
+        name: body.name,
+        lastName: body.lastName,
+        email: body.email,
+        userName: body.userName,
+        password: body.password,
+        age: body.age,
+        rol: body.rol,
+    }
+
+    User.findByIdAndUpdate(id, usuarioPorEditar, {
+            new: true,
+            runValidators: true
+        })
+        //Guarda el registro en la BD
+    usuarioPorEditar.save((err, usuarioDB) => {
         //
         if (err) {
             return res.status(500).json({
