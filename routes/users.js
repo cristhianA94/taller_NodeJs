@@ -26,7 +26,6 @@ app.post("/user", (req, res) => {
         password: body.password,
         age: body.age,
         rol: body.rol,
-        state: body.state
     });
     //Guarda el registro en la BD
     userGuardar.save((err, usuarioDB) => {

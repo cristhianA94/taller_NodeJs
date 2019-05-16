@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 //importa el Schema Users
-const Rol = require('../models/users.js');
+const Rol = require('../models/rol.js');
 
 
 app.get('/rol', (req, res) => {
