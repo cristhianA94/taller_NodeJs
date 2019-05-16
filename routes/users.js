@@ -7,10 +7,25 @@ const User = require('../models/users.js');
 
 
 app.get('/user', (req, res) => {
-    return res.json({
+    User.find({
+        //state: true
+    }, (err, usuarioDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            })
+        }
+        res.status(200).json({
+            ok: true,
+            data: usuarioDB
+        })
+    });
+
+    /* return res.json({
         "ok": true,
         'msg': "All ok"
-    });
+    }); */
     //res.send('Hello world');
 });
 
@@ -80,5 +95,21 @@ app.put("/user/id", (req, res) => {
         });
     });
 });
+
+
+//Realiza el post
+app.delete("/user:id", (req, res) => {
+    let id = req.params.id;
+    let usuarioState = {
+        state: false
+    }
+
+    /*  User.findByIdAndUpdate(id, usuarioState, {
+         new = true
+     }) */
+
+});
+
+
 
 module.exports = app;

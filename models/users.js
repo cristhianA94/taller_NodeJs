@@ -36,7 +36,8 @@ let userSchema = new Schema({
         required: [true, "El rol es requerido"]
     },
     state: {
-        type: Boolean
+        type: Boolean,
+        default: true
     }
 });
 
