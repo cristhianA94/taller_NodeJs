@@ -6,34 +6,38 @@ const uniqueValidator = require('mongoose-unique-validator');
 let Schema = mongoose.Schema;
 
 //Schema rol
-let rolSchema = new Schema({
+let salaSchema = new Schema({
     name: {
         type: String,
         //Restriccion si no esta lleno el campo
-        required: [true, "El rol es requerido"]
+        required: [true, "El nombre de la sala es requerido"]
     },
     description: {
         type: String,
         required: [true, "La descripcion es requerida"]
+    },
+    state: {
+        type: Boolean,
+        default: true
     }
 });
 
-/* 
-//Coge el objeto User y lo modifica
-rolSchema.methods.toJSON = function() {
-    let rol = this
-        //Agarra las propiedades del objeto
-    let rol_object = rol.toObject()
-    return rol_object
-}
 
+/* //Coge el objeto User y lo modifica
+salaSchema.methods.toJSON = function() {
+    let sala = this
+        //Agarra las propiedades del objeto
+    let sala_object = sala.toObject()
+    return sala_object
+}
+ */
 
 //Imprime error al haber alguna duplicacion de datos
-rolSchema.plugin(uniqueValidator, {
+salaSchema.plugin(uniqueValidator, {
     message: `{PATH} debe ser unico`
 });
- */
+
 
 //Exporta el schema a BD
 // Rol, nombre tabla que va air en Mongo
-module.exports = mongoose.model('Rol', rolSchema);
+module.exports = mongoose.model('Sala', salaSchema);

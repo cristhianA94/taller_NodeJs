@@ -8,7 +8,7 @@ const User = require('../models/users.js');
 
 app.get('/user', (req, res) => {
     User.find({
-        //state: true
+        
     }, (err, usuarioDB) => {
         if (err) {
             return res.status(500).json({
@@ -18,7 +18,7 @@ app.get('/user', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            data: usuarioDB
+            usuarioDB
         })
     });
 

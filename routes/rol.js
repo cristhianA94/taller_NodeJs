@@ -7,12 +7,56 @@ const Rol = require('../models/rol.js');
 
 
 app.get('/rol', (req, res) => {
+    //Buscar los que tengan el stado: TRUE
+    Rol.find({
+        //state: true
+    }).exec((err, rolDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+        res.status(200).json({
+            ok: true,
+            rolDB
+        })
+    })
+})
 
-    Rol.find().exec((err, rolDB) => {
 
-    });
-    //res.send('Hello world');
-});
+app.put('/rol/:id', (req, res) => {
+    let id = req.params.id
+    let body = req.body;
+
+    let rolPorEditar = {
+        name: body.name,
+        description: body.description
+    }
+
+    Rol.findByIdAndUpdate(id, rolPorEditar, {
+        new: true,
+        runValidators: true
+    }, (err, rolDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            });
+        }
+        if (!rolDB) {
+            return res.status(400).json({
+                ok: false,
+                rolDB
+            });
+        }
+        res.status(200).json({
+            ok: true,
+            rolDB
+        })
+    })
+})
+
 
 //Realiza el post
 app.post("/rol", (req, res) => {
@@ -38,16 +82,39 @@ app.post("/rol", (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            data: rolDB
-        });
-    });
-});
+            rolDB
+        })
+    })
+})
 
 
+app.delete('/rol/:id', (req, res) => {
+    let id = req.params.id
+    let rolState = {
+        state: false
+    }
 
+    Rol.findByIdAndUpdate(id, rolState, {
+        new: true,
+        runValidators: true
+    }, (err, rolDB) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            })
+        }
+        if (!rolDB) {
+            ok: false,
+            rolDB
+        }
 
-
-
+        res.status(200).json({
+            ok: true,
+            rolDB
+        })
+    })
+})
 
 
 module.exports = app;
